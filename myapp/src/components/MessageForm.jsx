@@ -1,0 +1,28 @@
+import React from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { messageAction } from "../store/actions";
+import { messages } from "../store/selectors;
+
+export default function MessageForm() {
+    const [message, setMessage] = useState({ author: "", message: "" });
+    const dispatch = useDispatch();
+    const messageList = useSelector(messages);
+    const botMessage = { author: "bot", message: "very nice" };
+
+    const createMessage = () => {
+        dispatch(addMessageWithThunk(message));
+    };
+
+    const addMessageWithThunk = () => (dispatch, getState) => {
+        dispatch(messageAction(message));
+        setMessage({ author: "", message: "" });
+        if (
+            messageList.length !== 0 &&
+            messageList[messageList.length - 1].author === "me"
+        ) {
+            setTimeout(() => dispatch(messageAction(botMessage)), 2000);
+        }
+    };
