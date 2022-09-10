@@ -1,5 +1,4 @@
 import { profileReducer } from "./reducer";
-import { combineReducers, createStore } from "redux";
 import { combineReducers, createStore, compose, applyMiddleware } from "redux";
 import { chatsReducer } from "./chatsReducer";
 import { messageReducer } from "./messageReducer";

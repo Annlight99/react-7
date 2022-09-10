@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { messageAction } from "../store/actions";
-import { messages } from "../store/selectors;
+import { messages } from "../store/selectors";
 
 export default function MessageForm() {
     const [message, setMessage] = useState({ author: "", message: "" });
@@ -26,3 +26,29 @@ export default function MessageForm() {
             setTimeout(() => dispatch(messageAction(botMessage)), 2000);
         }
     };
+
+    return (
+        <>
+            <TextField
+                className="input"
+                id="outlined-basic"
+                label="Outlined"
+                variant="outlined"
+                autoFocus={true}
+                value={message.message}
+                onChange={(e) => setMessage({ author: "me", message: e.target.value })}
+                type="text"
+                placeholder="наберите сообщение"
+            />
+            <Button
+                variant="contained"
+                color="success"
+                type="search"
+                onClick={createMessage}
+                style={{ margin: "15px 0px" }}
+            >
+                Создать сообщение
+            </Button>
+        </>
+    );
+}
